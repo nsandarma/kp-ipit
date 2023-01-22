@@ -1,0 +1,71 @@
+{%include "user/header.html"%}
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>REGISTRASI</h2>
+            <h3>DAFTAR <span>ALUMNI</span></h3>
+            <p>Isi data dibawah dengan benar !</p>
+        </div>
+
+
+
+        <div class="row mt-5">
+
+
+
+            <div class="">
+
+                <form method="post"  enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Username"
+                                required>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input type="text" class="form-control" name="password" id="password" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama anda"
+                            required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="nim" id="nim" placeholder="NIM"
+                            required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email anda"
+                            required>
+                    </div>
+                    <div class="form-group mt-3">
+                        
+                        <select name="jenis_kelamin" class="form-control" id="jenis_kelamin">
+                            <option value="Laki-Laki">Laki-Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="number" class="form-control" name="tahun" id="tahun" placeholder="Tahun"
+                            required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="file">Foto</label>
+                        <input type="file" class="form-control" name="file" id="file" placeholder="Foto"
+                            required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <div class="text-center"><button type="submit" class="btn btn-danger">Daftar</button></div>
+
+                    </div>
+                    
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</section><!-- End Contact Section -->

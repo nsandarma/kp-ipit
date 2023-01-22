@@ -1,0 +1,19 @@
+{%include "user/header.html"%}
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div class="hero-container">
+      <h3><strong>Agenda</strong></h3>
+      <!-- <h1>We're Creative Agency</h1> -->
+      <!-- <h2>We are team of talented designers making websites with Bootstrap</h2>
+       -->
+      <div class="card mb-3">
+        <img class="card-img-top" src="{{url_for('static',filename='uploads/'+agenda.banner)}}" alt="Card image cap" >
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{agenda.title}}</h5>
+          <p class="card-text">{{agenda.konten}}</p>
+          <p class="card-text"><small class="text-muted">{{agenda.jadwal}}</small></p>
+        </div>
+      </div>
+    </div>
+</section><!-- End Hero -->
+{%include "user/footer.html"%}

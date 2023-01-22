@@ -1,0 +1,94 @@
+{%include "admin/header.html"%}
+<div class="pcoded-inner-content">
+    <!-- Main-body start -->
+    <div class="main-body">
+        <div class="page-wrapper">
+            <!-- Page-body start -->
+            <div class="page-body">
+                <!-- Basic table card start -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="">Tabel Alumni</h5>
+                        <p class="text-danger">{{flas}}</p>
+
+                    </div>
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Foto</th>
+                                        <th>Nama</th>
+                                        <th>NIM</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Email</th>
+                                        <th>Tahun</th>
+                                        <th>Status</th>
+                                        <th class="text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for i in data_alumni%}
+                                    <tr>
+                                        <th scope="row">
+                                            <img src="{{url_for('static',filename='uploads/'+i.foto)}}"
+                                                class="rounded-circle" alt="{{i.foto}}" style="width: 80px;">
+
+                                        </th>
+                                        <td>{{i.nama}}</td>
+                                        <td>{{i.nim}}</td>
+                                        <td>{{i.jenis_kelamin}}</td>
+                                        <td>{{i.email}}</td>
+                                        <td>{{i.tahun}}</td>
+                                        {%if i.status == 'verified'%}
+                                        <td class=""><label
+                                            class="label label-success">{{i.status}}</label>
+                                        </td>
+                                        <td class="text-center">
+                                            <label for=""><a href="/admin/alumni/edit/{{i.nim}}" class="label label-primary">Edit</a></label>
+                                            <label for=""><a href="/admin/alumni/tolak/{{i.nim}}" class="label label-danger">Hapus</a></label>
+                                        </td>
+                                        {%else%}
+                                        <td class=""><label
+                                            class="label label-danger">{{i.status}}</label>
+                                        </td>
+                                        <td class="text-center">
+                                            <label for=""><a href="/admin/alumni/verifikasi/{{i.nim}}" class="label label-primary">Verifikasi</a></label>
+
+                                            <label for=""><a href="/admin/alumni/tolak/{{i.nim}}" class="label label-danger">Tolak</a></label>
+                                        </td>
+
+                                        {%endif%}
+                                    </tr>
+                                    {%endfor%}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Basic table card end -->
+
+                <!-- Background Utilities table end -->
+            </div>
+            <!-- Page-body end -->
+        </div>
+    </div>
+    <!-- Main-body end -->
+
+    <div id="styleSelector">
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- <script>
+    $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+})
+</script> -->
+
+{%include "admin/footer.html"%}

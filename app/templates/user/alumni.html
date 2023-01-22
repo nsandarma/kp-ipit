@@ -1,0 +1,51 @@
+{%include "user/header.html"%}
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="hero-container">
+    <h3 class="bg-dark">Data <strong>Alumni</strong></h3>
+    <!-- <h1>We're Creative Agency</h1> -->
+    <h2>Saat Ini Alumni yang sudah Terdaftar berjumlah {{jumlah}} orang</h2>
+    <a href="#team" class="btn-get-started scrollto">Lihat Daftar Alumni</a>
+  </div>
+</section><!-- End Hero -->
+<!-- ======= Team Section ======= -->
+<section id="team" class="team">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>ALUMNI</h2>
+        <h3>Daftar Alumni</h3>
+        <!-- <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p> -->
+      </div>
+
+      <div class="row">
+
+        {% for i in alumni %}
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="{{url_for('static',filename='uploads/'+i.foto)}}" class="img-fluid" alt="{{i.foto}}">
+                <!-- <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div> -->
+              </div>
+              <div class="member-info">
+                <h4>{{i.nama.upper()}}</h4>
+                <span>{{i.email}}</span>
+                <h4>{{i.batch}}</h4>
+                
+              </div>
+            </div>
+          </div>
+        {%endfor%}
+
+        
+      </div>
+
+    </div>
+  </section><!-- End Team Section -->
+{%include "user/footer.html"%}

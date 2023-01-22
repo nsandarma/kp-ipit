@@ -1,0 +1,45 @@
+{%include "user/header.html"%}
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div class="hero-container">
+        <h3>Lowongan <strong>Pekerjaan</strong></h3>
+        <!-- <h1>We're Creative Agency</h1> -->
+        <h2>Untuk saat ini lowongan Pekerjaan yang tersedia berjumlah {{jumlah}}</h2>
+        <a href="#team" class="btn-get-started scrollto">lihat Lowongan Pekerjaan</a>
+    </div>
+</section><!-- End Hero -->
+<!-- ======= Team Section ======= -->
+<section id="team" class="team">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>PEKERJAAN</h2>
+
+            <!-- <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p> -->
+        </div>
+
+        <div class="row">
+            {%for i in data%}
+
+
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-header bg-info fw-bold">
+                    {{i.perusahaan}}
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="bg-secondary text-dark">{{i.job_title}}</li>
+                    <li class="list-group-item bg-light">Jakarta</li>
+                    
+
+                    <li class="list-group-item bg-dark text-light">{{i.deskripsi}}</li>
+                    
+                </ul>
+            </div>
+            {%endfor%}
+
+
+        </div>
+
+    </div>
+</section><!-- End Team Section -->
+{%include "user/footer.html"%}

@@ -1,0 +1,112 @@
+{%include "admin/header.html"%}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Form Pekerjaan</h5>
+                <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
+            </div>
+            {%if u %}
+            <div class="card-block">
+                <form class="form-material" method="post">
+                    <div class="form-group form-default">
+                        <input type="text" name="perusahaan" class="form-control" value="{{u.perusahaan}}" required="">
+                        <span class="form-bar"></span>
+                        <label class="float-label">{{u.perusahaan}}</label>
+                    </div>
+                    <div class="form-group form-default">
+                        <input type="text" name="lokasi" class="form-control" value="{{u.lokasi}}" required="">
+                        <span class="form-bar"></span>
+                        <label class="float-label">{{u.lokasi}}</label>
+                    </div>
+                    <div class="form-group form-default">
+                        <input type="text" name="job_title" class="form-control" value="{{u.job_title}}" required="">
+                        <span class="form-bar"></span>
+                        <label class="float-label">{{u.job_title}}</label>
+                    </div>
+                    <div class="form-group form-default">
+                        <textarea name="desc_job" class="form-control" required=""></textarea>
+                        <span class="form-bar"></span>
+                        <label class="float-label">Desc Job</label>
+                    </div>
+                    <div class="form-group form-default">
+                        <button class="btn btn-info">Save</button>
+                    </div>
+                </form>
+            </div>
+            {%else%}
+            <div class="card-block">
+                <form class="form-material" method="post">
+                    <div class="form-group form-default">
+                        <input type="text" name="perusahaan" class="form-control" required="">
+                        <span class="form-bar"></span>
+                        <label class="float-label">Perusahaan</label>
+                    </div>
+                    <div class="form-group form-default">
+                        <input type="text" name="lokasi" class="form-control" required="">
+                        <span class="form-bar"></span>
+                        <label class="float-label">Lokasi</label>
+                    </div>
+                    <div class="form-group form-default">
+                        <input type="text" name="job_title" class="form-control" required="">
+                        <span class="form-bar"></span>
+                        <label class="float-label">Job Title</label>
+                    </div>
+                    <div class="form-group form-default">
+                        <textarea name="desc_job" class="form-control" required=""></textarea>
+                        <span class="form-bar"></span>
+                        <label class="float-label">Desc Job</label>
+                    </div>
+                    <div class="form-group form-default">
+                        <button class="btn btn-info">Save</button>
+                    </div>
+                </form>
+            </div>
+
+            {%endif%}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Data Lowongan Pekerjaan</h5>
+
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Perusahaan</th>
+                                <th>Lokasi</th>
+                                <th>Job Title</th>
+                                <th>Deskripsi</th>
+                                <th class="text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%for i in data%}
+                            <tr>
+
+                                <td>{{i.perusahaan}}</td>
+                                <td>{{i.lokasi}}</td>
+
+                                <td>{{i.job_title}}</td>
+                                <td>{{i.deskripsi}}</td>
+                                <td class="text-center">
+                                    <label for="" class="label label-danger"><a
+                                            href="/admin/pekerjaan/hapus/{{i.id}}">Hapus</a></label>
+                                    <label for="" class="label label-primary"><a href="/admin/pekerjaan/edit/{{i.id}}">Edit</a></label>
+
+                                </td>
+                            </tr>
+                            {%endfor%}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%include "admin/footer.html"%}
