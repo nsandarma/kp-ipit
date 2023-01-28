@@ -247,7 +247,10 @@ def alumni_(step,nim):
             return redirect('/admin/alumni')
         return render_template('admin/edit_alumni.html',a=q,u=u)
 
-            
+    elif step == 'get_detail':
+        q = Alumni.query.filter_by(nim=nim).first()
+        u = User.query.filter_by(nama=q.nama).first()
+        return render_template('admin/detail_alumni.html',q=q,u=u)
 
 @app.route('/admin/agenda/<step>/<id>',methods=['GET','POST'])
 def agenda(step,id):
@@ -318,8 +321,6 @@ def loker(step,id):
                     session['SEND_MSG'] = "Sukses Mengirim Notif"
                 else:
                     session['SEND_MSG'] = "GAGAL MENGIRIM NOTIF"
-
-
                     
                 return redirect('/admin/pekerjaan')
             
