@@ -1,4 +1,4 @@
-from app import app,render_template,redirect,request,session,Alumni,User,db,secure_filename,generate_password_hash,check_password_hash,pekerjaan,Agenda,send_from_directory,send_file,send_notif
+from app import app,render_template,redirect,request,session,Alumni,User,db,secure_filename,generate_password_hash,check_password_hash,pekerjaan,Agenda,get_excel,send_file,send_notif
 import pandas as pd
 import os
 
@@ -73,22 +73,30 @@ def daftar():
         nama = request.form['nama']
         nim = request.form['nim']
         email = request.form['email']
+        tempat_lahir = request.form['tempat_lahir']
+        tanggal_lahir = request.form['tanggal_lahir']
         jenis_kelamin = request.form['jenis_kelamin']
-        tahun = request.form['tahun']
+        agama = request.form['agama']
+        alamat = request.form['alamat']
+        tahun_lulus = request.form['tahun_lulus']
+        ipk = request.form['ipk']
+        judul_skripsi = request.form['judul_skripsi']
+        pekerjaan = request.form['pekerjaan']
+        tempat_bekerja = request.form['tempat_bekerja']
         foto = request.files['file']
         username = request.form['username']
-        username = username.lower()
         password  = generate_password_hash(request.form['password'])
         filename = secure_filename(foto.filename)
         try:
             foto.save(f'app/static/uploads/{filename}')
-            q = Alumni(nama=nama,email=email,jenis_kelamin=jenis_kelamin,nim=nim,tahun=tahun,foto=filename,status='unverified')
+            q = Alumni(nama=nama,nim= nim,email=email,tempat_lahir=tempat_lahir,tanggal_lahir=tanggal_lahir,
+            jenis_kelamin=jenis_kelamin,agama=agama,alamat=alamat,tahun_lulus=tahun_lulus,ipk=ipk,judul_skripsi=judul_skripsi,pekerjaan=pekerjaan,tempat_bekerja=tempat_bekerja,foto=filename,status='unverified'
+            )
+
+            b = User(nama=nama,username=username,password=password)
             db.session.add(q)
-            db.session.commit()
-            b = User(nama=nama,username=username,password=password,role=0)
             db.session.add(b)
             db.session.commit()
-
             return redirect('/')
         except Exception as e:
             return f'{e}'
@@ -179,17 +187,27 @@ def alumni_(step,nim):
             nama = request.form['nama']
             nim = request.form['nim']
             email = request.form['email']
+            tempat_lahir = request.form['tempat_lahir']
+            tanggal_lahir = request.form['tanggal_lahir']
             jenis_kelamin = request.form['jenis_kelamin']
-            tahun = request.form['tahun']
+            agama = request.form['agama']
+            alamat = request.form['alamat']
+            tahun_lulus = request.form['tahun_lulus']
+            ipk = request.form['ipk']
+            judul_skripsi = request.form['judul_skripsi']
+            pekerjaan = request.form['pekerjaan']
+            tempat_bekerja = request.form['tempat_bekerja']
             foto = request.files['file']
             username = request.form['username']
             password  = generate_password_hash(request.form['password'])
             filename = secure_filename(foto.filename)
             try:
-                
                 foto.save(f'app/static/uploads/{filename}')
-                q = Alumni(nama=nama,email=email,jenis_kelamin=jenis_kelamin,nim=nim,tahun=tahun,foto=filename,status='verified')
-                b = User(nama=nama,username=username,password=password,role=1)
+                q = Alumni(nama=nama,nim= nim,email=email,tempat_lahir=tempat_lahir,tanggal_lahir=tanggal_lahir,
+                jenis_kelamin=jenis_kelamin,agama=agama,alamat=alamat,tahun_lulus=tahun_lulus,ipk=ipk,judul_skripsi=judul_skripsi,pekerjaan=pekerjaan,tempat_bekerja=tempat_bekerja,foto=filename,status='verified'
+                )
+
+                b = User(nama=nama,username=username,password=password)
                 db.session.add(q)
                 db.session.add(b)
                 db.session.commit()
@@ -202,19 +220,28 @@ def alumni_(step,nim):
         q = Alumni.query.filter_by(nim=nim).first()
         u = User.query.filter_by(nama=q.nama).first()
         if request.method == 'POST':
-            q.nama = request.form['nama']
+            nama = request.form['nama']
+            q.nama = nama
             q.nim = request.form['nim']
             q.email = request.form['email']
+            q.tempat_lahir = request.form['tempat_lahir']
+            q.tanggal_lahir = request.form['tanggal_lahir']
             q.jenis_kelamin = request.form['jenis_kelamin']
-            q.tahun = request.form['tahun']
+            q.agama= request.form['agama']
+            q.alamat= request.form['alamat']
+            q.tahun_lulus = request.form['tahun_lulus']
+            q.ipk = request.form['ipk']
+            q.judul_skripsi = request.form['judul_skripsi']
+            q.pekerjaan = request.form['pekerjaan']
+            q.tempat_bekerja = request.form['tempat_bekerja']
             os.remove(f'app/static/uploads/{q.foto}')
             foto = request.files['file']
             filename = secure_filename(foto.filename)
             foto.save(f'app/static/uploads/{filename}')
             q.foto = filename
+            u.nama = request.form['nama']
             u.username = request.form['username']
             u.password = generate_password_hash(request.form['password'])
-
             q.status = 'verified'
             db.session.commit()
             return redirect('/admin/alumni')
@@ -281,7 +308,7 @@ def loker(step,id):
                 job_title = request.form['job_title']
                 deskripsi = request.form['desc_job']
                 user_created = 'admin'
-                q = pekerjaan(perusahaan=perusahaan,lokasi=lokasi,job_title=job_title,deskripsi=deskripsi,user_created=user_created)
+                q = pekerjaan(perusahaan=perusahaan,lokasi=lokasi,job_title=job_title,deskripsi=deskripsi)
                 subject = f"Lowongan Pekerjaan -{job_title}-"
                 body = f'{deskripsi}'
                 send_notif(to=email,subject=subject,body=body)
@@ -317,110 +344,19 @@ def loker(step,id):
 @app.route('/admin/excel/<page>')
 def excel(page):
     if page == 'total_alumni':
-        q = Alumni.query.all()
-        nama = []
-        nim = []
-        email = []
-        jenis_kelamin= []
-        tahun = []
-        status =[]
-        foto =  []
-        for i in q:
-            nama.append(i.nama)
-            nim.append(i.nim)
-            email.append(i.email)
-            jenis_kelamin.append(i.jenis_kelamin)
-            tahun.append(i.tahun)
-            status.append(i.status)
-            
-            foto.append(i.foto)
-        df = pd.DataFrame({'nama':nama,'email':email,'nim':nim,'jenis kelamin':jenis_kelamin,'tahun':tahun,'status':status,'foto':foto})
-        uri = f'app/data/{page}.xlsx'
-        df.to_excel(uri)
+        get_excel(page)
         return send_file(f'data/{page}.xlsx')
     elif page == 'alumni_verified':
-        q = Alumni.query.filter_by(status='verified').all()
-        nama = []
-        nim = []
-        email = []
-        jenis_kelamin= []
-        tahun = []
-        status =[]
-        foto =  []
-        for i in q:
-            nama.append(i.nama)
-            nim.append(i.nim)
-            email.append(i.email)
-            jenis_kelamin.append(i.jenis_kelamin)
-            tahun.append(i.tahun)
-            status.append(i.status)
-            
-            foto.append(i.foto)
-        df = pd.DataFrame({'nama':nama,'email':email,'nim':nim,'jenis kelamin':jenis_kelamin,'tahun':tahun,'status':status,'foto':foto})
-        uri = f'app/data/{page}.xlsx'
-        df.to_excel(uri)
+        get_excel(page)
         return send_file(f'data/{page}.xlsx')
     elif page == 'alumni_unverified':
-        q = Alumni.query.filter_by(status='unverified').all()
-        nama = []
-        nim = []
-        email = []
-        jenis_kelamin= []
-        tahun = []
-        status =[]
-        foto =  []
-        for i in q:
-            nama.append(i.nama)
-            nim.append(i.nim)
-            email.append(i.email)
-            jenis_kelamin.append(i.jenis_kelamin)
-            tahun.append(i.tahun)
-            status.append(i.status)
-            
-            foto.append(i.foto)
-        df = pd.DataFrame({'nama':nama,'email':email,'nim':nim,'jenis kelamin':jenis_kelamin,'tahun':tahun,'status':status,'foto':foto})
-        uri = f'app/data/{page}.xlsx'
-        df.to_excel(uri)
+        get_excel(page)
         return send_file(f'data/{page}.xlsx')
     elif page == 'agenda':
-        q =  Agenda.query.all()
-        title = []
-        konten = []
-        jadwal = []
-        banner = []
-        for i in q:
-            title.append(i.title)
-            konten.append(i.konten)
-            jadwal.append(i.jadwal)
-            banner.append(i.banner)
-        df = pd.DataFrame({
-            'title':title,
-            'konten':konten,
-            'jadwal':jadwal,
-            'banner':banner
-        })
-        uri = f'app/data/{page}.xlsx'
-        df.to_excel(uri)
+        get_excel(page)
         return send_file(f'data/{page}.xlsx')
     elif page == 'pekerjaan':
-        q =  pekerjaan.query.all()
-        perusahaan = []
-        lokasi= []
-        job_title = []
-        deskripsi = []
-        for i in q:
-            perusahaan.append(i.perusahaan)
-            lokasi.append(i.lokasi)
-            job_title.append(i.job_title)
-            deskripsi.append(i.deskripsi)
-        uri = f'app/data/{page}.xlsx'
-        df = pd.DataFrame({
-            'perusahaan':perusahaan,
-            'lokasi':lokasi,
-            'job title':job_title,
-            'deskripsi':deskripsi
-        })
-        df.to_excel(uri)
+        get_excel(page)
         return send_file(f'data/{page}.xlsx')
 
 

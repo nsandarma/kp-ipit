@@ -13,7 +13,6 @@ subject = "notif"
 body = """
 Hello world
 """
-to = ['aqhsalfaisal@gmail.com','nsandarma@gmail.com']
 
 def send_notif(to,subject,body):
     for i in to:

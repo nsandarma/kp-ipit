@@ -11,19 +11,31 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nama" placeholder="{{a.nama}}" value="{{a.nama}}">
+                    <input required type="text" class="form-control" name="nama" placeholder="{{a.nama}}">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">NIM</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="{{a.nim}}" value="{{a.nim}}" name="nim">
+                    <input required  type="text" class="form-control" name="nim" placeholder="{{a.nim}}">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" placeholder="{{a.email}}" value="{{a.email}}" name="email">
+                    <input required  type="email" class="form-control" name="email" placeholder="{{a.email}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tempat Lahir</label>
+                <div class="col-sm-10">
+                    <input required  type="text" class="form-control" name="tempat_lahir" placeholder="{{a.tempat_lahir}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                <div class="col-sm-10">
+                    <input required type="date" class="form-control" name="tanggal_lahir" value="{{a.tanggal_lahir}}">
                 </div>
             </div>
             <div class="form-group row">
@@ -33,22 +45,63 @@
                         <option value="opt1">Pilih Jenis Kelamin</option>
                         <option value="Laki-Laki">Laki-Laki</option>
                         <option value="Perempuan">Perempuan</option>
-            
                     </select>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Tahun</label>
+                <label class="col-sm-2 col-form-label">Agama</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="{{a.tahun}}" placeholder="{{a.tahun}}" name="tahun" >
+                    <select name="agama" class="form-control" required>
+                        <option value="opt1">Pilih Agama</option>
+                        <option value="Islam">Islam</option>    
+                        <option value="Kristen">Kristen</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Buddha">Buddha</option>
+                        <option value="Konghucu">Konghucu</option>            
+                    </select>
                 </div>
             </div>
-
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Alamat</label>
+                <div class="col-sm-10">
+                    <input required type="text" class="form-control" name="alamat" placeholder="{{a.alamat}}" >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tahun Lulus</label>
+                <div class="col-sm-10">
+                    <input required type="text" class="form-control" name="tahun_lulus" placeholder="{{a.tahun_lulus}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">IPK</label>
+                <div class="col-sm-10">
+                    <input required type="text" class="form-control" name="ipk" placeholder="{{a.ipk}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Judul Skripsi</label>
+                <div class="col-sm-10">
+                    <input required type="text" class="form-control" name="judul_skripsi" placeholder="{{a.judul_skripsi}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Pekerjaan</label>
+                <div class="col-sm-10">
+                    <input required type="text" class="form-control" name="pekerjaan" placeholder="{{a.pekerjaan}}" >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tempat Bekerja</label>
+                <div class="col-sm-10">
+                    <input required type="text" class="form-control" name="tempat_bekerja" placeholder="{{a.tempat_bekerja}}">
+                </div>
+            </div>
             
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Upload File</label>
                 <div class="col-sm-10">
-                    <input type="file" name="file" class="form-control">
+                    <input type="file" name="file" class="form-control" required>
                 </div>
             </div>
 
@@ -63,10 +116,10 @@
 
                     <div class="row">
                         <div class="col-sm-6">
-                            <input type="text" name="username" class="form-control form-bg-info" placeholder="{{u.username}}" required>
+                            <input value="{{u.username}}" type="text" name="username" class="form-control form-bg-info" placeholder="username">
                         </div>
                         <div class="col-sm-6">
-                            <input type="password" name="password" class="form-control form-bg-inverse" placeholder="password" required>
+                            <input type="password" name="password" class="form-control form-bg-inverse" placeholder="password">
                         </div>
                     </div>
                     

@@ -17,49 +17,79 @@
 
             <div class="">
 
-                <form method="post"  enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <input type="text" name="username" class="form-control" id="username" placeholder="Username"
                                 required>
                         </div>
                         <div class="col-md-6 form-group mt-3 mt-md-0">
-                            <input type="text" class="form-control" name="password" id="password" placeholder="Password" required>
+                            <input type="text" class="form-control" name="password" id="password" placeholder="Password"
+                                required>
                         </div>
                     </div>
                     <div class="form-group mt-3">
-                        <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama anda"
-                            required>
+                        <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama anda" required>
                     </div>
                     <div class="form-group mt-3">
-                        <input type="text" class="form-control" name="nim" id="nim" placeholder="NIM"
-                            required>
+                        <input type="text" class="form-control" name="nim" id="nim" placeholder="NIM" required>
                     </div>
                     <div class="form-group mt-3">
                         <input type="email" class="form-control" name="email" id="email" placeholder="Email anda"
                             required>
                     </div>
                     <div class="form-group mt-3">
-                        
+                        <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" placeholder="Tempat Lahir"
+                            required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" placeholder="Tanggal Lahir"
+                            required>
+                    </div>
+                    
+                    <div class="form-group mt-3">
                         <select name="jenis_kelamin" class="form-control" id="jenis_kelamin">
                             <option value="Laki-Laki">Laki-Laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
                     <div class="form-group mt-3">
-                        <input type="number" class="form-control" name="tahun" id="tahun" placeholder="Tahun"
-                            required>
+                        <select name="agama" class="form-control" id="jenis_kelamin">
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="number" class="form-control" name="tahun_lulus" id="tahun_lulus" placeholder="Tahun Lulus" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="ipk" id="ipk" placeholder="IPK" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="judul_skripsi" id="judul_skripsi" placeholder="Judul Skripsi" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" placeholder="Pekerjaan" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="tempat_bekerja" id="tempat_bekerja" placeholder="Tempat Bekerja" required>
                     </div>
                     <div class="form-group mt-3">
                         <label for="file">Foto</label>
-                        <input type="file" class="form-control" name="file" id="file" placeholder="Foto"
-                            required>
+                        <input type="file" class="form-control" name="file" id="file" placeholder="Foto" required>
                     </div>
                     <div class="form-group mt-3">
                         <div class="text-center"><button type="submit" class="btn btn-danger">Daftar</button></div>
 
                     </div>
-                    
+
 
                 </form>
 
