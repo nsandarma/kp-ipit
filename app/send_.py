@@ -28,14 +28,9 @@ def send_notif(to,subject,body):
             with smtplib.SMTP_SSL('smtp.gmail.com',465,context=context) as smptp:
                 smptp.login(email_sender,email_password)
                 smptp.sendmail(email_sender,i,em.as_string())
-            print('success')
+            return True
         except :
-            print('gagal')
-
-
-sandy = [
-    []
-]
+            return False
 
 
 

@@ -311,15 +311,22 @@ def loker(step,id):
                 q = pekerjaan(perusahaan=perusahaan,lokasi=lokasi,job_title=job_title,deskripsi=deskripsi)
                 subject = f"Lowongan Pekerjaan -{job_title}-"
                 body = f'{deskripsi}'
-                send_notif(to=email,subject=subject,body=body)
+                send = send_notif(to=email,subject=subject,body=body)
                 db.session.add(q)
                 db.session.commit()
+                if send :
+                    session['SEND_MSG'] = "Sukses Mengirim Notif"
+                else:
+                    session['SEND_MSG'] = "GAGAL MENGIRIM NOTIF"
+
+
+                    
                 return redirect('/admin/pekerjaan')
             
 
             except Exception as e:
                 return f'{e}'
-        return render_template('admin/pekerjaan.html',data=data)
+        return render_template('admin/pekerjaan.html',data=data,msg=session.get('SEND_MSG'))
     if step == 'hapus':
         q = pekerjaan.query.filter_by(id=id).first()
         db.session.delete(q)
