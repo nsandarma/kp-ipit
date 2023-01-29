@@ -50,9 +50,10 @@ def login():
                 return redirect('/admin')
             try :
                 q = User.query.filter_by(username=username).first()
+                a = Alumni.query.filter_by(nama=q.nama).first()
 
                 if check_password_hash(q.password,password):
-                    if q.role == 0:
+                    if a.status == 'unverified':
                         session['flash_l'] = 'Anda belum Terverifikasi, Mohon Tunggu verifikasi'
                         return redirect('/login')
                     else:
@@ -119,7 +120,7 @@ def user():
 def halaman(page):
     if session.get('user'):
         user = User.query.filter_by(username=session.get('user')).first()
-        pekerjaan 
+        
         if page == 'alumni':
             data = Alumni.query.all()
             jumlah = len(data)
@@ -128,7 +129,8 @@ def halaman(page):
             data = pekerjaan.query.all()
             jumlah = len(data)
             return render_template('user/pekerjaan.html',user=user,data=data,jumlah=jumlah)
-
+    else:
+        return redirect('/login')
 
 @app.route('/admin')
 def admin():
